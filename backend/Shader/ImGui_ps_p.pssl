@@ -1,8 +1,10 @@
 #include "ImGui_shader_common.h"
 
+//
 SamplerState sampler0;
 Texture2D texture0;
 
+CXX_SYMBOL("ImGui_PS::EmbeddedShader::Basic_Pixel_Shader")
 float4 main(PS_INPUT input) : S_TARGET_OUTPUT
 {
 	float4 color = input.color * texture0.Sample(sampler0, input.uv);

@@ -131,28 +131,53 @@ struct float4x4
 #elif defined(__PSSL__)
 #define PSSL_ONLY(var) var
 #define PSSL_SEMANTIC(var) : var
+#if defined (__ORBIS__)
+#define CXX_SYMBOL(basename)
+#elif defined(__PROSPERO__)
+#define CXX_SYMBOL(basename) [CxxSymbol(basename)]
+#endif
 #endif
 
-struct VS_INPUT
+typedef float4x4 Matrix4x4;
+typedef float4 RGBA;
+
+struct VS_INPUT	
 {
     float2 position PSSL_SEMANTIC(POSITION);
-    float2 uv       PSSL_SEMANTIC(TEXCOORD0);
-    float4 color    PSSL_SEMANTIC(COLOR0);
+    float2 uv PSSL_SEMANTIC(TEXCOORD0);
+
+#if defined(__cplusplus)
+	uint32_t color;
+#else
+	RGBA color PSSL_SEMANTIC(COLOR0);
+#endif
 };
 
 struct VS_OUTPUT
 {
     float4 position PSSL_SEMANTIC(S_POSITION);
-    float4 color    PSSL_SEMANTIC(COLOR0);
-    float2 uv       PSSL_SEMANTIC(TEXCOORD0);
+
+#if defined(__cplusplus)
+	uint32_t color;
+#else
+	RGBA color PSSL_SEMANTIC(COLOR0);
+#endif
+
+	float2 uv PSSL_SEMANTIC(TEXCOORD0);
 };
 
 struct PS_INPUT
 {
     float4 position PSSL_SEMANTIC(S_POSITION);
-    float4 color    PSSL_SEMANTIC(COLOR0);
-    float2 uv       PSSL_SEMANTIC(TEXCOORD0);
+
+#if defined(__cplusplus)
+	uint32_t color;
+#else
+	RGBA color PSSL_SEMANTIC(COLOR0);
+#endif
+
+	float2 uv PSSL_SEMANTIC(TEXCOORD0);
 };
 
-#define USE_FULL_SHADER 1
+
 #endif

@@ -2,9 +2,10 @@
 
 ConstantBuffer ShaderConstants
 {
-	column_major matrix m_WorldViewProj;
+    column_major matrix m_WorldViewProj;
 };
 
+CXX_SYMBOL("ImGui_PS::EmbeddedShader::Basic_Vertex_Shader")
 VS_OUTPUT main(VS_INPUT input)
 {
 	VS_OUTPUT output;
